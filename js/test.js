@@ -43,7 +43,7 @@ fetch(url)
 
 // delete
 function deletemovie() {
-    fetch(url + 258, {
+    fetch(url + '/'+258, {
         method: 'DELETE',
         headers: {"Content-type": "application/json; charset=UTF-8"},
     })
