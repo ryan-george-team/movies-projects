@@ -2,7 +2,7 @@ const url = "https://raspy-peaceful-alarm.glitch.me/movies"
 const movietest ={
     title: 'blade',
     rating: '4.5',
-    poster:'',
+    poster:'../img/movie.jpg',
     year :"20xx",
     genre: "action",
     director :'blade the director',
@@ -11,7 +11,7 @@ const movietest ={
 }
 console.log(movietest)
 function postmovie() {
-    fetch('https://raspy-peaceful-alarm.glitch.me/movies', {
+    fetch(url, {
         method: "POST",
         body: JSON.stringify(movietest),
         headers: {"Content-type": "application/json; charset=UTF-8"},
@@ -43,11 +43,21 @@ fetch(url)
 
 // delete
 function deletemovie() {
-    fetch('https://raspy-peaceful-alarm.glitch.me/movies/' + 258, {
+    fetch(url + 258, {
         method: 'DELETE',
         headers: {"Content-type": "application/json; charset=UTF-8"},
     })
         .then(res => res.json()) // or res.json()
         .then(res => console.log(res))
         .catch(error => console.log('not deleted', error))
+}
+
+//edit movie
+function editmovie() {
+    fetch(url + '/' + 8, {
+        method: "PUT",
+        body: JSON.stringify(movietest),
+        headers: {"Content-type": "application/json; charset=UTF-8"},
+    }).then(json => console.log(json))
+        .catch(err => console.log('you have error plz cry', err));
 }
