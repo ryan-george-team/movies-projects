@@ -21,7 +21,7 @@ function getData() {
             let html = '<section class="row" style="width: 100%">';
             for (let i = 0; i < movieData.length; i++) {
                 html += `<div class="card col-md-6" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
-<button class="btn btn-primary edit" id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#editModal${[i]}">edit</button>
+<button class="btn btn-primary " id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#editModal${[i]}">edit</button>
   <img src="${movieData[i].poster}" class="card-img-top pt-2" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
   <div class="card-body">
     <h5 class="card-title">${movieData[i].title}</h5>
@@ -40,18 +40,18 @@ function getData() {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input id="movieTitle" value="${movieData[i].title}">
-                <input id="actors" value="${movieData[i].actors}">
-                <input id="genre" value="${movieData[i].genre}">
-                <textarea id="plot">${movieData[i].plot}</textarea>
-                <input id="rating" value="${movieData[i].rating}">
-                <input id="director" value="${movieData[i].director}">
-                <input id="year" value="${movieData[i].director}">
+                <input id="movieTitle${[i]}" value="${movieData[i].title}">
+                <input id="actors${[i]}" value="${movieData[i].actors}">
+                <input id="genre${[i]}" value="${movieData[i].genre}">
+                <textarea id="plot${[i]}">${movieData[i].plot}</textarea>
+                <input id="rating${[i]}" value="${movieData[i].rating}">
+                <input id="director${[i]}" value="${movieData[i].director}">
+                <input id="year${[i]}" value="${movieData[i].year}">
 
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button id="sendNewMovie" type="button" class="btn btn-primary" data-bs-dismiss="modal">Edit Movie</button>
+                <button id="${movieData[i].id}" type="button" class="btn btn-primary edit" data-bs-dismiss="modal">Edit Movie</button>
             </div>
         </div>
     </div>
@@ -70,19 +70,32 @@ function getData() {
             $('.edit').click(function () {
                 console.log("hello")
                 console.log(this.id)
+
+                let editedMovie = {
+                    title: document.querySelector(`#movieTitle${[(this.id)-2]}`).value,
+                    rating: document.querySelector(`#rating${[(this.id)-2]}`).value,
+                    poster: '../img/movie.jpg',
+                    year: document.querySelector(`#year${[(this.id)-2]}`).value,
+                    genre: document.querySelector(`#genre${[(this.id)-2]}`).value,
+                    director: document.querySelector(`#director${[(this.id)-2]}`).value,
+                    plot: document.querySelector(`#plot${[(this.id)-2]}`).value,
+                    actors: document.querySelector(`#actors${[(this.id)-2]}`).value,
+                }
+                console.log(editedMovie);
+                console.log(parseInt(editedMovie.year));
+                if ((Number(editedMovie.year))) {
+                    console.log('is a num');
+                    editTheMovie(editedMovie, this.id)
+                }
+                else {
+                    alert("Please enter a numerical year");
+                }
             })
 
         })
         .catch(error => console.log(error))
 
 }
-
-
-
-
-
-
-
 
 
 function deletemovie(id) {
@@ -132,5 +145,13 @@ function postmovie(newMovie) {
         .catch(err => console.log('you have error plz cry',err));
 }
 
-
+function editTheMovie(movie, id) {
+    fetch(url + '/' + id, {
+        method: "PUT",
+        body: JSON.stringify(movie),
+        headers: {"Content-type": "application/json; charset=UTF-8"},
+    }).then(json => console.log(json))
+        .then(res => getData())
+        .catch(err => console.log('you have error plz cry', err));
+}
 
