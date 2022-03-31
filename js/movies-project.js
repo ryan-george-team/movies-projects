@@ -51,7 +51,7 @@ function getData() {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button id="${movieData[i].id}" type="button" class="btn btn-primary edit" data-bs-dismiss="modal">Edit Movie</button>
+                <button id="${movieData[i].id}" type="button" class="btn btn-primary edit" data-bs-dismiss="modal" value="${i}" >Edit Movie</button>
             </div>
         </div>
     </div>
@@ -70,16 +70,17 @@ function getData() {
             $('.edit').click(function () {
                 console.log("hello")
                 console.log(this.id)
+                console.log(this.value)
 
                 let editedMovie = {
-                    title: document.querySelector(`#movieTitle${[(this.id)-2]}`).value,
-                    rating: document.querySelector(`#rating${[(this.id)-2]}`).value,
+                    title: document.querySelector(`#movieTitle${[this.value]}`).value,
+                    rating: document.querySelector(`#rating${[this.value]}`).value,
                     poster: '../img/movie.jpg',
-                    year: document.querySelector(`#year${[(this.id)-2]}`).value,
-                    genre: document.querySelector(`#genre${[(this.id)-2]}`).value,
-                    director: document.querySelector(`#director${[(this.id)-2]}`).value,
-                    plot: document.querySelector(`#plot${[(this.id)-2]}`).value,
-                    actors: document.querySelector(`#actors${[(this.id)-2]}`).value,
+                    year: document.querySelector(`#year${[this.value]}`).value,
+                    genre: document.querySelector(`#genre${[this.value]}`).value,
+                    director: document.querySelector(`#director${[this.value]}`).value,
+                    plot: document.querySelector(`#plot${[this.value]}`).value,
+                    actors: document.querySelector(`#actors${[this.value]}`).value,
                 }
                 console.log(editedMovie);
                 console.log(parseInt(editedMovie.year));
@@ -150,7 +151,7 @@ function editTheMovie(movie, id) {
         method: "PUT",
         body: JSON.stringify(movie),
         headers: {"Content-type": "application/json; charset=UTF-8"},
-    }).then(json => console.log(json))
+    })
         .then(res => getData())
         .catch(err => console.log('you have error plz cry', err));
 }
