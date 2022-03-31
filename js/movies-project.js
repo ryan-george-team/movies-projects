@@ -20,7 +20,8 @@ function getData() {
 
             let html = '<section class="row" style="width: 100%">';
             for (let i = 0; i < movieData.length; i++) {
-                html += `<div class="card col-md-6" style="width: 18rem;">
+                html += `<div class="card col-md-6" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
+<button class="btn btn-primary edit" id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#editModal${[i]}">edit</button>
   <img src="${movieData[i].poster}" class="card-img-top pt-2" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
   <div class="card-body">
     <h5 class="card-title">${movieData[i].title}</h5>
@@ -28,6 +29,32 @@ function getData() {
     <button class="btn btn-primary delete" id="${movieData[i].id}">Delete</button>
     <a href="#" class="btn btn-primary">More Info</a>
   </div>
+</div>
+
+<!-- Modal Edit-->
+<div class="modal fade" id="editModal${[i]}" tabindex="-1" aria-labelledby="modalEdit" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEdit">Edit Movie</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input id="movieTitle" value="${movieData[i].title}">
+                <input id="actors" value="${movieData[i].actors}">
+                <input id="genre" value="${movieData[i].genre}">
+                <textarea id="plot">${movieData[i].plot}</textarea>
+                <input id="rating" value="${movieData[i].rating}">
+                <input id="director" value="${movieData[i].director}">
+                <input id="year" value="${movieData[i].director}">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="sendNewMovie" type="button" class="btn btn-primary" data-bs-dismiss="modal">Edit Movie</button>
+            </div>
+        </div>
+    </div>
 </div>`
             }
             html += `</section>`
@@ -40,10 +67,23 @@ function getData() {
                 deletemovie(this.id);
             })
 
+            $('.edit').click(function () {
+                console.log("hello")
+                console.log(this.id)
+            })
+
         })
         .catch(error => console.log(error))
 
 }
+
+
+
+
+
+
+
+
 
 function deletemovie(id) {
     fetch(url + '/' + id, {
@@ -53,7 +93,8 @@ function deletemovie(id) {
         .then(res => res.json()) // or res.json()
         .then(res => getData())
         .catch(error => console.log('not deleted', error))
-};
+}
+
 
 $('#sendNewMovie').click(function () {
     console.log('hello');
@@ -69,28 +110,27 @@ $('#sendNewMovie').click(function () {
     }
     // console.log(newMovie);
     console.log(parseInt(newMovie.year));
-    if (!isNaN(Number(newMovie.year))) {
+    if ((Number(newMovie.year))) {
         console.log('is a num');
-        test(newMovie);
+        postmovie(newMovie)
     }
     else {
         alert("Please enter a numerical year");
     }
 })
 
-function test(testMovie) {
-    console.log(testMovie.year);
-}
 
-// function addCard() {
-//     html += `<div class="card" style="width: 18rem;">
-//   <img src="${movieData[i].poster}" class="card-img-top" alt="${movieData.title} movie poster" style="height: 200px; width: 150px">
-//     <div class="card-body">
-//         <h5 class="card-title">${.title}</h5>
-//     <p class="card-text">${movieData[i].plot}</p>
-//     <a href="#" class="btn btn-primary">Go somewhere</a>
-// </div>`
-// };
+
+function postmovie(newMovie) {
+    fetch(url, {
+        method: "POST",
+        body: JSON.stringify(newMovie),
+        headers: {"Content-type": "application/json; charset=UTF-8"},
+    })
+        .then(json => console.log(json))
+        .then(res => getData())
+        .catch(err => console.log('you have error plz cry',err));
+}
 
 
 
