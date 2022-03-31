@@ -61,3 +61,13 @@ function editmovie() {
     }).then(json => console.log(json))
         .catch(err => console.log('you have error plz cry', err));
 }
+
+function addCard() {
+    html += `<div class="card" style="width: 18rem;">
+  <img src="${movieData[i].poster}" class="card-img-top" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
+  <div class="card-body">
+    <h5 class="card-title">${movieData[i].title}</h5>
+    <p class="card-text">${movieData[i].plot}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>`
+};
