@@ -1,5 +1,5 @@
 body{
-    background-color: #ff3939;
+    background-color: #860303;
 }
 
 
@@ -18,8 +18,12 @@ body{
 }
 
 
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/*Movie Project Title */
+h1 {
+    color: #ffb735;
 }
