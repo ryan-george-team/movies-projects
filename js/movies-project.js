@@ -18,16 +18,22 @@ function getData() {
         .then(movieData => {
             console.log(movieData)
 
-            let html = '<section class="row" style="width: 100%">';
+            let html = '<section class="row mt-3 d-flex justify-content-center" style="width: 100%">';
             for (let i = 0; i < movieData.length; i++) {
-                html += `<div class="card col-md-6" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
-<button class="btn btn-primary " id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#editModal${[i]}">edit</button>
+                html += `<div class="card m-2" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
+<div class="d-flex justify-content-center mt-3 mb-2">
+<button class="btn btn-primary" id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#editModal${[i]}" style="width: 50%">Edit Movie</button>
+</div>
+<div class="d-flex justify-content-center">
   <img src="${movieData[i].poster}" class="card-img-top pt-2" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
+  </div>
   <div class="card-body">
     <h5 class="card-title">${movieData[i].title}</h5>
     <p class="card-text">${movieData[i].plot}</p>
-    <button class="btn btn-primary delete" id="${movieData[i].id}">Delete</button>
-<button class="btn btn-primary " id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#modalInfo${[i]}">More info</button>
+    <div class="d-flex justify-content-center">
+    <button class="btn btn-primary delete mx-2" id="${movieData[i].id}">Delete</button>
+    <button class="btn btn-primary mx-2" id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#modalInfo${[i]}">More info</button>
+    </div>
   </div>
 </div>
 
@@ -52,7 +58,7 @@ function getData() {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button id="${movieData[i].id}" type="button" class="btn btn-primary edit" data-bs-dismiss="modal" value="${i}" >Edit Movie</button>
+                <button id="${movieData[i].id}" type="button" class="btn btn-primary edit" data-bs-dismiss="modal" value="${i}" >Edit</button>
             </div>
         </div>
     </div>
@@ -70,12 +76,12 @@ function getData() {
             <div class="modal-body">
   <img src="${movieData[i].poster}" class="card-img-top pt-2" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
   <section>
-                Actors: ${movieData[i].actors}<br>
-               Director: ${movieData[i].director}<br>
-               Genre: ${movieData[i].genre}<br>
-               Year: ${movieData[i].year}<br>
-               Rating: ${movieData[i].rating}<br>
-               Summary: ${movieData[i].plot}
+                <b>Actors:</b> ${movieData[i].actors}<br>
+               <b>Director:</b> ${movieData[i].director}<br>
+               <b>Genre:</b> ${movieData[i].genre}<br>
+               <b>Year:</b> ${movieData[i].year}<br>
+               <b>Rating:</b> ${movieData[i].rating}<br>
+               <b>Summary:</b> ${movieData[i].plot}
                
 </section>
             </div>
@@ -84,7 +90,7 @@ function getData() {
             </div>
         </div>
     </div>
-</div>\`
+</div>
 
 `
 
@@ -120,8 +126,7 @@ function getData() {
                 if ((Number(editedMovie.year))) {
                     console.log('is a num');
                     editTheMovie(editedMovie, this.id)
-                }
-                else {
+                } else {
                     alert("Please enter a numerical year");
                 }
             })
@@ -160,12 +165,10 @@ $('#sendNewMovie').click(function () {
     if ((Number(newMovie.year))) {
         console.log('is a num');
         postmovie(newMovie)
-    }
-    else {
+    } else {
         alert("Please enter a numerical year");
     }
 })
-
 
 
 function postmovie(newMovie) {
@@ -176,7 +179,7 @@ function postmovie(newMovie) {
     })
         .then(json => console.log(json))
         .then(res => getData())
-        .catch(err => console.log('you have error plz cry',err));
+        .catch(err => console.log('you have error plz cry', err));
 }
 
 function editTheMovie(movie, id) {
@@ -189,7 +192,7 @@ function editTheMovie(movie, id) {
         .catch(err => console.log('you have error plz cry', err));
 }
 
-$('#sans').dblclick(function (){
+$('#sans').dblclick(function () {
     console.log('hello')
     $('body').css({
         "font-family": '"Comic Sans MS", "Comic Sans", cursive',
