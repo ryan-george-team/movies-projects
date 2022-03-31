@@ -27,7 +27,7 @@ function getData() {
     <h5 class="card-title">${movieData[i].title}</h5>
     <p class="card-text">${movieData[i].plot}</p>
     <button class="btn btn-primary delete" id="${movieData[i].id}">Delete</button>
-    <a href="#" class="btn btn-primary">More Info</a>
+<button class="btn btn-primary " id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#modalInfo${[i]}">More info</button>
   </div>
 </div>
 
@@ -40,13 +40,14 @@ function getData() {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input id="movieTitle${[i]}" value="${movieData[i].title}">
-                <input id="actors${[i]}" value="${movieData[i].actors}">
-                <input id="genre${[i]}" value="${movieData[i].genre}">
-                <textarea id="plot${[i]}">${movieData[i].plot}</textarea>
-                <input id="rating${[i]}" value="${movieData[i].rating}">
-                <input id="director${[i]}" value="${movieData[i].director}">
-                <input id="year${[i]}" value="${movieData[i].year}">
+               Title: <input id="movieTitle${[i]}" value="${movieData[i].title}"><br>
+                Actors: <input id="actors${[i]}" value="${movieData[i].actors}"><br>
+               Genre: <input id="genre${[i]}" value="${movieData[i].genre}"><br>
+               Rating: <input id="rating${[i]}" value="${movieData[i].rating}"><br>
+               Director: <input id="director${[i]}" value="${movieData[i].director}"><br>
+               Year: <input id="year${[i]}" value="${movieData[i].year}"><br>
+               Summary: <textarea id="plot${[i]}">${movieData[i].plot}</textarea>
+
 
             </div>
             <div class="modal-footer">
@@ -55,7 +56,39 @@ function getData() {
             </div>
         </div>
     </div>
-</div>`
+</div>
+
+
+<!--movie info-->
+<div class="modal fade" id="modalInfo${[i]}" tabindex="-1" aria-labelledby="modalInfo" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalInfo">${movieData[i].title}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+  <img src="${movieData[i].poster}" class="card-img-top pt-2" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
+  <section>
+                Actors: ${movieData[i].actors}<br>
+               Director: ${movieData[i].director}<br>
+               Genre: ${movieData[i].genre}<br>
+               Year: ${movieData[i].year}<br>
+               Rating: ${movieData[i].rating}<br>
+               Summary: ${movieData[i].plot}
+               
+</section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>\`
+
+`
+
+
             }
             html += `</section>`
 
@@ -156,3 +189,10 @@ function editTheMovie(movie, id) {
         .catch(err => console.log('you have error plz cry', err));
 }
 
+$('#sans').dblclick(function (){
+    console.log('hello')
+    $('body').css({
+        "font-family": '"Comic Sans MS", "Comic Sans", cursive',
+    })
+
+})
