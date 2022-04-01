@@ -197,5 +197,4 @@ $('#sans').dblclick(function () {
     $('body').css({
         "font-family": '"Comic Sans MS", "Comic Sans", cursive',
     })
-
 })
