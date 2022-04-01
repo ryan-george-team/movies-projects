@@ -1,4 +1,5 @@
 const url = "https://raspy-peaceful-alarm.glitch.me/movies";
+const poster = ['../img/movie.jpg', '../img/movie2.jpg','../img/movie3.jpg']
 
 fetch(url)
     .then(r => r.json())
@@ -18,23 +19,30 @@ function getData() {
         .then(movieData => {
             console.log(movieData)
 
-            let html = '<section class="row mt-3 d-flex justify-content-center" style="width: 100%">';
+            let html = `<div class="d-flex justify-content-center mt-1" id="addmoviebutton">
+                            <button type="button" id="addNewMovieBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Add New Movie
+                            </button>
+                        </div>
+                        <section class="row mt-3 d-flex justify-content-center" style="width: 100%">`;
             for (let i = 0; i < movieData.length; i++) {
-                html += `<div class="card m-2" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
+
+                html += `<div class="card m-2 yellowborder" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
 <div class="d-flex justify-content-center mt-3 mb-2">
 <button class="btn btn-primary" id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#editModal${[i]}" style="width: 50%">Edit Movie</button>
 </div>
 <div class="d-flex justify-content-center">
-  <img src="${movieData[i].poster}" class="card-img-top pt-2" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
+  <img src="${movieData[i].poster}" class="card-img-top yellowborder images" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
   </div>
-  <div class="card-body">
+  <div class="card-body" style="height: 15rem">
     <h5 class="card-title">${movieData[i].title}</h5>
     <p class="card-text">${movieData[i].plot}</p>
-    <div class="d-flex justify-content-center">
-    <button class="btn btn-primary delete mx-2" id="${movieData[i].id}">Delete</button>
-    <button class="btn btn-primary mx-2" id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#modalInfo${[i]}">More info</button>
-    </div>
   </div>
+  
+  <div class="d-flex justify-content-center">
+    <button class="btn btn-primary delete mx-2" id="${movieData[i].id}">Delete</button>
+    <button class="btn btn-primary mx-2" id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#modalInfo${[i]}">More info</button> 
+    </div>
 </div>
 
 <!-- Modal Edit-->
@@ -114,7 +122,7 @@ function getData() {
                 let editedMovie = {
                     title: document.querySelector(`#movieTitle${[this.value]}`).value,
                     rating: document.querySelector(`#rating${[this.value]}`).value,
-                    poster: '../img/movie.jpg',
+                    poster: movieData[this.value].poster,
                     year: document.querySelector(`#year${[this.value]}`).value,
                     genre: document.querySelector(`#genre${[this.value]}`).value,
                     director: document.querySelector(`#director${[this.value]}`).value,
@@ -150,10 +158,11 @@ function deletemovie(id) {
 
 $('#sendNewMovie').click(function () {
     console.log('hello');
+    let randomnum = Math.floor(Math.random()*poster.length);
     let newMovie = {
         title: document.querySelector('#movieTitle').value,
         rating: document.querySelector('#rating').value,
-        poster: '../img/movie.jpg',
+        poster: poster[randomnum],
         year: document.querySelector('#year').value,
         genre: document.querySelector('#genre').value,
         director: document.querySelector('#director').value,
