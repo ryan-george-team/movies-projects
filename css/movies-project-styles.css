@@ -27,7 +27,31 @@ body{
 h1 {
     color: #ffb735;
 }
+#cards{
+    padding-right: 5rem;
+}
+.images{
+    margin-top: .5rem;
 
-/*#addNewMovieBtn {*/
-/*    display: none;*/
-/*}*/
+}
+
+.yellowborder{
+    border: .3rem #ffb735 solid;
+}
+.card{
+    background-color: #11ff09;
+}
+
+.card-body{
+    background-color: #f3f3f3;
+}
+
+.modal-content {
+    background-color: #860303;
+    color: #ffb735;
+}
+
+.modal-body{
+    background-color: lightcoral;
+    color: black;
+}
