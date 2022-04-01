@@ -1,5 +1,5 @@
 const url = "https://raspy-peaceful-alarm.glitch.me/movies";
-const poster = ['../img/movie.jpg', '../img/movie2.jpg','../img/movie3.jpg']
+const poster = ['../img/movie.jpg', '../img/movie2.jpg','../img/movie3.jpg', '../img/movie4.jpg']
 
 fetch(url)
     .then(r => r.json())
@@ -27,16 +27,16 @@ function getData() {
                         <section class="row mt-3 d-flex justify-content-center" style="width: 100%">`;
             for (let i = 0; i < movieData.length; i++) {
 
-                html += `<div class="card m-2 yellowborder" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
+                html += `<div class="card m-2 yellowborder pb-1" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
 <div class="d-flex justify-content-center mt-3 mb-2">
 <button class="btn btn-primary" id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#editModal${[i]}" style="width: 50%">Edit Movie</button>
 </div>
-<div class="d-flex justify-content-center">
-  <img src="${movieData[i].poster}" class="card-img-top yellowborder images" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
+<div class="d-flex justify-content-center ">
+  <img src="${movieData[i].poster}" class="card-img-top yellowborder images " alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
   </div>
   <div class="card-body" style="height: 15rem">
     <h5 class="card-title">${movieData[i].title}</h5>
-    <p class="card-text">${movieData[i].plot}</p>
+    <p class="card-text ">${movieData[i].plot}</p>
   </div>
   
   <div class="d-flex justify-content-center">
