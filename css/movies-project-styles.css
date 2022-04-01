@@ -32,26 +32,33 @@ h1 {
 }
 .images{
     margin-top: .5rem;
-
 }
 
-.yellowborder{
+.yellowborder, .btn, .modal-content{
     border: .3rem #ffb735 solid;
 }
-.card{
-    background-color: #11ff09;
+.card {
+    background-color: #223c80;
 }
 
-.card-body{
-    background-color: #f3f3f3;
-}
+/*.btn {*/
+/*    border: .3rem #ffb735 solid;*/
+/*}*/
 
 .modal-content {
-    background-color: #860303;
+    background-color: navy;
     color: #ffb735;
 }
 
 .modal-body{
-    background-color: lightcoral;
+    background-color: beige;
     color: black;
+}
+
+.card-text {
+    background-color: beige;
+}
+
+.card-title {
+    color: #ffb735;
 }
