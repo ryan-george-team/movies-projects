@@ -24,7 +24,7 @@ function getData() {
                                 Add New Movie
                             </button>
                         </div>
-                        <section class="row mt-3 d-flex justify-content-center" style="width: 100%">`;
+                        <section class="row mt-3 d-flex justify-content-center movie-holder">`;
             for (let i = 0; i < movieData.length; i++) {
 
                 html += `<div class="card m-2 yellowborder pb-1" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
