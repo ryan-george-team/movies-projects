@@ -36,9 +36,11 @@ h1 {
 
 .yellowborder, .btn, .modal-content{
     border: .3rem #ffb735 solid;
+    border-radius: 16px;
 }
 .card {
     background-color: #223c80;
+
 }
 
 /*.btn {*/
@@ -46,7 +48,9 @@ h1 {
 /*}*/
 
 .modal-content {
-    background-color: navy;
+    background-color: #223c80;
+
+
     color: #ffb735;
 }
 
@@ -57,8 +61,16 @@ h1 {
 
 .card-text {
     background-color: beige;
+    border-radius: 5px;
 }
 
 .card-title {
     color: #ffb735;
 }
+
+.movie-holder{
+    width: 100%;
+    background-color: #330101;
+    border-radius: 10px;
+}
+
