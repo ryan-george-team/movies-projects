@@ -1,5 +1,5 @@
 const url = "https://raspy-peaceful-alarm.glitch.me/movies";
-const poster = ['../img/movie.jpg', '../img/movie2.jpg','../img/movie3.jpg', '../img/movie4.jpg']
+const poster = ['../img/movie.jpg', '../img/movie2.jpg', '../img/movie3.jpg', '../img/movie4.jpg']
 
 fetch(url)
     .then(r => r.json())
@@ -17,17 +17,60 @@ function getData() {
     fetch(url)
         .then(res => res.json())
         .then(movieData => {
-            console.log(movieData)
+            // console.log(movieData)
+            getCards(movieData);
+        })
+        .catch(error => console.log(error));
+}
 
-            let html = `<div class="d-flex justify-content-center mt-1" id="addmoviebutton">
-                            <button type="button" id="addNewMovieBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                Add New Movie
-                            </button>
-                        </div>
-                        <section class="row mt-3 d-flex justify-content-center movie-holder">`;
-            for (let i = 0; i < movieData.length; i++) {
+function getCards(movieData) {
+    // language=HTML
+    let html = `
+                <div class="d-flex justify-content-center mt-1" id="addmoviebutton">
+                    <button type="button" id="addNewMovieBtn" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                        Add New Movie
+                    </button>
 
-                html += `<div class="card m-2 yellowborder pb-1" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
+                    <!--  Sort by genre dropdown-->
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            Sort By Genre
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <li>
+                                <button value="action" class="dropdown-item" type="button">Action</button>
+                            </li>
+                            <li>
+                                <button value="drama" class="dropdown-item" type="button">Drama</button>
+                            </li>
+                            <li>
+                                <button value="fantasy" class="dropdown-item" type="button">Fantasy</button>
+                            </li>
+                            <li>
+                                <button value="History" class="dropdown-item" type="button">History</button>
+                            </li>
+                            <li>
+                                <button value="horror" class="dropdown-item" type="button">Horror</button>
+                            </li>
+                            <li>
+                                <button value="romance" class="dropdown-item" type="button">Romance</button>
+                            </li>
+                            <li>
+                                <button value="scifi" class="dropdown-item" type="button">Sci-Fi</button>
+                            </li>
+                            <li>
+                                <button value="war" class="dropdown-item" type="button">War</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <section class="row mt-3 d-flex justify-content-center movie-holder">`;
+    for (let i = 0; i < movieData.length; i++) {
+
+        html += `<div class="card m-2 yellowborder pb-1" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
 <div class="d-flex justify-content-center mt-3 mb-2">
 <button class="btn btn-primary" id="${movieData[i].id} " data-bs-toggle="modal" data-bs-target="#editModal${[i]}" style="width: 50%">Edit Movie</button>
 </div>
@@ -101,50 +144,44 @@ function getData() {
 </div>
 
 `
+    }
+    html += `</section>`
 
+    $('#cards').html(html)
 
-            }
-            html += `</section>`
+    $('.delete').click(function () {
+        console.log("hello")
+        console.log(this.id)
+        deletemovie(this.id);
+    })
 
-            $('#cards').html(html)
+    $('.edit').click(function () {
+        console.log("hello")
+        console.log(this.id)
+        console.log(this.value)
 
-            $('.delete').click(function () {
-                console.log("hello")
-                console.log(this.id)
-                deletemovie(this.id);
-            })
-
-            $('.edit').click(function () {
-                console.log("hello")
-                console.log(this.id)
-                console.log(this.value)
-
-                let editedMovie = {
-                    title: document.querySelector(`#movieTitle${[this.value]}`).value,
-                    rating: document.querySelector(`#rating${[this.value]}`).value,
-                    poster: movieData[this.value].poster,
-                    year: document.querySelector(`#year${[this.value]}`).value,
-                    genre: document.querySelector(`#genre${[this.value]}`).value,
-                    director: document.querySelector(`#director${[this.value]}`).value,
-                    plot: document.querySelector(`#plot${[this.value]}`).value,
-                    actors: document.querySelector(`#actors${[this.value]}`).value,
-                }
-                console.log(editedMovie);
-                console.log(parseInt(editedMovie.year));
-                if ((Number(editedMovie.year))) {
-                    console.log('is a num');
-                    editTheMovie(editedMovie, this.id)
-                } else {
-                    alert("Please enter a numerical year");
-                }
-            })
-
-        })
-        .catch(error => console.log(error))
-
+        let editedMovie = {
+            title: document.querySelector(`#movieTitle${[this.value]}`).value,
+            rating: document.querySelector(`#rating${[this.value]}`).value,
+            poster: movieData[this.value].poster,
+            year: document.querySelector(`#year${[this.value]}`).value,
+            genre: document.querySelector(`#genre${[this.value]}`).value,
+            director: document.querySelector(`#director${[this.value]}`).value,
+            plot: document.querySelector(`#plot${[this.value]}`).value,
+            actors: document.querySelector(`#actors${[this.value]}`).value,
+        }
+        console.log(editedMovie);
+        console.log(parseInt(editedMovie.year));
+        if ((Number(editedMovie.year))) {
+            console.log('is a num');
+            editTheMovie(editedMovie, this.id)
+        } else {
+            alert("Please enter a numerical year");
+        }
+    })
 }
 
-
+// Deletes movie on database
 function deletemovie(id) {
     fetch(url + '/' + id, {
         method: 'DELETE',
@@ -158,7 +195,7 @@ function deletemovie(id) {
 
 $('#sendNewMovie').click(function () {
     console.log('hello');
-    let randomnum = Math.floor(Math.random()*poster.length);
+    let randomnum = Math.floor(Math.random() * poster.length);
     let newMovie = {
         title: document.querySelector('#movieTitle').value,
         rating: document.querySelector('#rating').value,
@@ -179,6 +216,26 @@ $('#sendNewMovie').click(function () {
     }
 })
 
+// User selected genre
+$(document).on('click', '.dropdown-item', function () {
+    $(this).parents('.dropdown-menu').prev().html($(this).html());
+    let genreSelection = $(this).html().toLowerCase();
+    sortGenreFx(genreSelection);
+});
+
+// Returns array of movies by the genre selected by user
+function sortGenreFx(selectedGenre) {
+    fetch(url)
+        .then(r => r.json())
+        .then(data => {
+            console.log(data);
+            console.log(selectedGenre);
+            let filteredByGenreArray = data.filter(dataByGenre => dataByGenre.genre.toLowerCase().includes(selectedGenre));
+            console.log(filteredByGenreArray);
+            getCards(filteredByGenreArray);
+        })
+        .catch(error => console.log(error))
+}
 
 function postmovie(newMovie) {
     fetch(url, {
