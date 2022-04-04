@@ -6,6 +6,8 @@ fetch(url)
     .then(data => {
         // console.log(data)
         document.querySelector(".loader").style.display = "none"//stop the load
+        document.querySelector(".holder").style.display = "flex"
+        document.querySelector(".holder-2").style.display = "flex"
     })
 int()
 
