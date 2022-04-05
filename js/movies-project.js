@@ -1,5 +1,7 @@
 const url = "https://raspy-peaceful-alarm.glitch.me/movies";
 const poster = ['../img/movie.jpg', '../img/movie2.jpg', '../img/movie3.jpg', '../img/movie4.jpg', '../img/movie5.jpg']
+let genreCheck = ['action', 'drama', 'fantasy', 'history', 'horror', 'romance' , 'sci-fi', 'war', 'comedy']
+
 
 fetch(url)
     .then(r => r.json())
@@ -167,13 +169,27 @@ let moviePlot = movieData[i].plot.substring(0, 150);
         console.log("hello")
         console.log(this.id)
         console.log(this.value)
+        let genreString =  document.querySelector(`#genre${[this.value]}`).value.split(",");
+        console.log(genreString)
+        // console.log(genreString[0].toLowerCase())
+        let newGenewArray =[]
 
+       for (let b =0;  b < genreString.length; b++) {
+           genreCheck.forEach(genre=>{
+               if (genreString[b].toLowerCase().includes(genre)){
+                   newGenewArray.push(genreString[b])
+               }
+           })
+       }
+        console.log(newGenewArray)
+        let newGeneString = newGenewArray.join(", ")
+        console.log(newGeneString)
         let editedMovie = {
             title: document.querySelector(`#movieTitle${[this.value]}`).value,
             rating: document.querySelector(`#rating${[this.value]}`).value,
             poster: movieData[this.value].poster,
             year: document.querySelector(`#year${[this.value]}`).value,
-            genre: document.querySelector(`#genre${[this.value]}`).value,
+            genre: newGeneString,
             director: document.querySelector(`#director${[this.value]}`).value,
             plot: document.querySelector(`#plot${[this.value]}`).value,
             actors: document.querySelector(`#actors${[this.value]}`).value,
