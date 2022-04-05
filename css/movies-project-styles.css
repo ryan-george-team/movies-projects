@@ -1,0 +1,137 @@
+body{
+    background-color: #860303;
+}
+
+
+.loader {
+    background-color: #f3f3f3;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #860303;
+    border-bottom: 16px solid #ffb735;
+    border-right: 2px solid #6135ff;
+    border-left: 2px solid #11ff09;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/*Movie Project Title */
+h1 {
+    color: #ffb735;
+}
+#cards{
+    padding-right: 5rem;
+}
+.images{
+    margin-top: .5rem;
+}
+
+.yellowborder, .btn, .modal-content{
+    border: .3rem #ffb735 solid;
+    border-radius: 16px;
+}
+.card {
+    background-color: #223c80;
+
+}
+
+/*.btn {*/
+/*    border: .3rem #ffb735 solid;*/
+/*}*/
+
+.modal-content {
+    background-color: #223c80;
+
+
+    color: #ffb735;
+}
+
+.modal-body{
+    background-color: beige;
+    color: black;
+}
+
+.card-text {
+    background-color: beige;
+    border-radius: 5px;
+}
+
+.card-title {
+    color: #ffb735;
+}
+
+.movie-holder{
+    width: 100%;
+    background-color: #330101;
+    border-radius: 10px;
+}
+.moreInfo-border{
+    border: .3rem #ffb735 solid;
+    border-radius: 16px;
+}
+
+.holder{
+
+    background-color: black;
+    border-radius: 7px;
+    height: 50px;
+    width: 50px;
+    display: none;
+    justify-content: center;
+    animation: swing 2000ms linear forwards infinite alternate;
+}
+.holder-2{
+margin-left: 98%;
+    background-color: black;
+    border-radius: 7px;
+    height: 50px;
+    width: 50px;
+    display: none;
+    justify-content: center;
+    animation: swing2 2000ms linear forwards infinite alternate;
+}
+.black-box{
+    background-color: black;
+
+    height: 50px;
+    width: 50px;
+}
+.light{
+    display: flex;
+    justify-content: center;
+    /*margin: 200px;*/
+    background-color: rgba(250, 250, 6, 0.57);
+    border-radius: 7px;
+    height: 400px;
+    width: 35px;
+
+}
+@keyframes swing {
+    0%{
+        transform: rotate(180deg);
+
+    }
+
+    100%{
+        transform: rotate(250deg);
+    }
+}
+
+@keyframes swing2 {
+    0%{
+        transform: rotate(110deg);
+
+    }
+
+    100%{
+        transform: rotate(180deg);
+    }
+}
