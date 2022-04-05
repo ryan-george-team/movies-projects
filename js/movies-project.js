@@ -107,7 +107,7 @@ let moviePlot = movieData[i].plot.substring(0, 150);
             <div class="modal-body">
                Title: <input id="movieTitle${[i]}" value="${movieData[i].title}"><br>
                 Actors: <input id="actors${[i]}" value="${movieData[i].actors}"><br>
-               Genre: <input id="genre${[i]}" value="${movieData[i].genre}"><br>
+               Genre: <textarea id="genre${[i]}">${movieData[i].genre}</textarea><br>
                Rating: <input id="rating${[i]}" value="${movieData[i].rating}"><br>
                Director: <input id="director${[i]}" value="${movieData[i].director}"><br>
                Year: <input id="year${[i]}" value="${movieData[i].year}"><br>
