@@ -73,6 +73,10 @@ h1 {
     background-color: #330101;
     border-radius: 10px;
 }
+.moreInfo-border{
+    border: .3rem #ffb735 solid;
+    border-radius: 16px;
+}
 
 .holder{
 

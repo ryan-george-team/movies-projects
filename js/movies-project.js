@@ -106,15 +106,20 @@ let moviePlot = movieData[i].plot.substring(0, 150);
                 <h5 class="modal-title" id="modalEdit">Edit Movie</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-               Title: <input id="movieTitle${[i]}" value="${movieData[i].title}"><br>
-                Actors: <input id="actors${[i]}" value="${movieData[i].actors}"><br>
-               Genre: <textarea id="genre${[i]}">${movieData[i].genre}</textarea><br>
-               Rating: <input id="rating${[i]}" value="${movieData[i].rating}"><br>
-               Director: <input id="director${[i]}" value="${movieData[i].director}"><br>
-               Year: <input id="year${[i]}" value="${movieData[i].year}"><br>
-               Summary: <textarea id="plot${[i]}">${movieData[i].plot}</textarea>
-
+            <div class="modal-body  ">
+            <div class="row justify-content-around">
+              <section class="col-6"> Title: <input id="movieTitle${[i]}" value="${movieData[i].title}"></section>
+              <section class="col-6">  Actors: <input id="actors${[i]}" value="${movieData[i].actors}"></section>
+              </div>
+              <div class="row justify-content-between">
+              <section class="col-2"> Director: <input id="director${[i]}" value="${movieData[i].director}"></section>
+               <section class="col-2">Year: <input id="year${[i]}" value="${movieData[i].year}"></section>
+               <section class="col-2"> Rating: <input id="rating${[i]}" value="${movieData[i].rating}" style="width: 70%"></section>
+               </div>
+               <div class="row justify-content-around">
+               <section class="col-4" style="height: 150px; width: 200px"> Genre: <textarea id="genre${[i]}" style="height:125px"> ${movieData[i].genre}</textarea></section>
+              <section class="col-4" style="height: 150px; width: 200px"> Summary: <textarea id="plot${[i]}" style="height: 125px" >${movieData[i].plot}</textarea></section>
+                </div>
 
             </div>
             <div class="modal-footer">
@@ -135,7 +140,9 @@ let moviePlot = movieData[i].plot.substring(0, 150);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-  <img src="${movieData[i].poster}" class="card-img-top pt-2" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px">
+            <div class="d-flex justify-content-center mb-3">
+  <img src="${movieData[i].poster}" class="card-img-top  moreInfo-border" alt="${movieData[i].title} movie poster" style="height: 200px; width: 150px;">
+  </div>
   <section>
                 <b>Actors:</b> ${movieData[i].actors}<br>
                <b>Director:</b> ${movieData[i].director}<br>
