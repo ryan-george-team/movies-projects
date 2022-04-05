@@ -42,6 +42,9 @@ function getCards(movieData) {
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
                     <li>
+                        <button value="all" class="dropdown-item" type="button">All</button>
+                    </li>
+                    <li>
                         <button value="action" class="dropdown-item" type="button">Action</button>
                     </li>
                     <li>
@@ -246,9 +249,11 @@ function sortGenreFx(selectedGenre) {
     fetch(url)
         .then(r => r.json())
         .then(data => {
-            console.log(data);
+
             let filteredByGenreArray = data.filter(dataByGenre => dataByGenre.genre.toLowerCase().includes(selectedGenre.toLowerCase()));
-            if (filteredByGenreArray.length === 0) {
+            if (selectedGenre.toLowerCase() == "all"){
+                location.reload()
+            }else if (filteredByGenreArray.length === 0) {
                 alert(`There are no movies with the genre: ${selectedGenre}`);
                 location.reload();
             }
