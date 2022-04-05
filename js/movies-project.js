@@ -28,48 +28,48 @@ function getData() {
 function getCards(movieData) {
     // language=HTML
     let html = `
-                <div class="d-flex justify-content-center mt-1" id="addmoviebutton">
-                    <button type="button" id="addNewMovieBtn" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
-                        Add New Movie
-                    </button>
+        <div class="d-flex justify-content-center mt-1" id="addmoviebutton">
+            <button type="button" id="addNewMovieBtn" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                Add New Movie
+            </button>
 
-                    <!--  Sort by genre dropdown-->
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                            Sort By Genre
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                            <li>
-                                <button value="action" class="dropdown-item" type="button">Action</button>
-                            </li>
-                            <li>
-                                <button value="drama" class="dropdown-item" type="button">Drama</button>
-                            </li>
-                            <li>
-                                <button value="fantasy" class="dropdown-item" type="button">Fantasy</button>
-                            </li>
-                            <li>
-                                <button value="History" class="dropdown-item" type="button">History</button>
-                            </li>
-                            <li>
-                                <button value="horror" class="dropdown-item" type="button">Horror</button>
-                            </li>
-                            <li>
-                                <button value="romance" class="dropdown-item" type="button">Romance</button>
-                            </li>
-                            <li>
-                                <button value="scifi" class="dropdown-item" type="button">Sci-Fi</button>
-                            </li>
-                            <li>
-                                <button value="war" class="dropdown-item" type="button">War</button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            <!--  Sort by genre dropdown-->
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu2"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    Sort By Genre
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                    <li>
+                        <button value="action" class="dropdown-item" type="button">Action</button>
+                    </li>
+                    <li>
+                        <button value="drama" class="dropdown-item" type="button">Drama</button>
+                    </li>
+                    <li>
+                        <button value="fantasy" class="dropdown-item" type="button">Fantasy</button>
+                    </li>
+                    <li>
+                        <button value="History" class="dropdown-item" type="button">History</button>
+                    </li>
+                    <li>
+                        <button value="horror" class="dropdown-item" type="button">Horror</button>
+                    </li>
+                    <li>
+                        <button value="romance" class="dropdown-item" type="button">Romance</button>
+                    </li>
+                    <li>
+                        <button value="scifi" class="dropdown-item" type="button">Sci-Fi</button>
+                    </li>
+                    <li>
+                        <button value="war" class="dropdown-item" type="button">War</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
 
-                <section class="row mt-3 d-flex justify-content-center movie-holder">`;
+        <section class="row mt-3 d-flex justify-content-center movie-holder">`;
     for (let i = 0; i < movieData.length; i++) {
 
         html += `<div class="card m-2 yellowborder pb-1" style="width: 18rem;" xmlns="http://www.w3.org/1999/html">
@@ -194,6 +194,18 @@ function deletemovie(id) {
         .catch(error => console.log('not deleted', error))
 }
 
+function newMovieGenreSelection() {
+        console.log('hello I am other click function');
+        let selectedGenreArray = [];
+        // let checkedGenres = $(':checkbox:checked');
+        $(':checkbox:checked').each(function (i) {
+            selectedGenreArray[i] = $(this).val();
+        })
+    let genreString = selectedGenreArray.join(' , ');
+    console.log(genreString);
+    return genreString;
+    }
+
 
 $('#sendNewMovie').click(function () {
     console.log('hello');
@@ -203,12 +215,12 @@ $('#sendNewMovie').click(function () {
         rating: document.querySelector('#rating').value,
         poster: poster[randomnum],
         year: document.querySelector('#year').value,
-        genre: document.querySelector('#genre').value,
+        genre: newMovieGenreSelection(),
         director: document.querySelector('#director').value,
         plot: document.querySelector('#plot').value,
         actors: document.querySelector('#actors').value,
     }
-    // console.log(newMovie);
+    console.log(newMovie);
     console.log(parseInt(newMovie.year));
     if ((Number(newMovie.year))) {
         console.log('is a num');
@@ -218,10 +230,11 @@ $('#sendNewMovie').click(function () {
     }
 })
 
+
 // User selected genre
 $(document).on('click', '.dropdown-item', function () {
     $(this).parents('.dropdown-menu').prev().html($(this).html());
-    let genreSelection = $(this).html().toLowerCase();
+    let genreSelection = $(this).html();
     sortGenreFx(genreSelection);
 });
 
@@ -231,9 +244,11 @@ function sortGenreFx(selectedGenre) {
         .then(r => r.json())
         .then(data => {
             console.log(data);
-            console.log(selectedGenre);
-            let filteredByGenreArray = data.filter(dataByGenre => dataByGenre.genre.toLowerCase().includes(selectedGenre));
-            console.log(filteredByGenreArray);
+            let filteredByGenreArray = data.filter(dataByGenre => dataByGenre.genre.toLowerCase().includes(selectedGenre.toLowerCase()));
+            if (filteredByGenreArray.length === 0) {
+                alert(`There are no movies with the genre: ${selectedGenre}`);
+                location.reload();
+            }
             getCards(filteredByGenreArray);
         })
         .catch(error => console.log(error))

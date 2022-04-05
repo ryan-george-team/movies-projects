@@ -29,7 +29,65 @@
             <div class="modal-body">
                 <input id="movieTitle" placeholder="Movie Title">
                 <input id="actors" placeholder="Actors">
-                <input id="genre" placeholder="Genre">
+
+
+                <!--                <input id="genre" placeholder="Genre">-->
+
+                <div id="addGenreCheckBoxes" class="btn-group-sm d-flex flex-wrap" role="group" aria-label="Basic checkbox toggle button group">
+                    <div>
+                        <input type="checkbox" class="btn-check" id="addAction" value="Action" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="addAction">Action</label>
+
+                        <input type="checkbox" class="btn-check" id="addDrama" value="Drama" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="addDrama">Drama</label>
+
+                        <input type="checkbox" class="btn-check" id="addFantasy" value="Fantasy" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="addFantasy">Fantasy</label>
+
+                        <input type="checkbox" class="btn-check" id="addHistory" value="History" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="addHistory">History</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="btn-check" id="addHorror" value="Horror" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="addHorror">Horror</label>
+
+                        <input type="checkbox" class="btn-check" id="addRomance" value="Romance" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="addRomance">Romance</label>
+
+                        <input type="checkbox" class="btn-check" id="addSciFi" value="Sci-Fi" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="addSciFi">Sci-Fi</label>
+
+                        <input type="checkbox" class="btn-check" id="addWar" value="War" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="addWar">War</label>
+                    </div>
+
+                </div>
+
+
+                <!--                <p>Genre:</p>-->
+
+                <!--                <div>-->
+                <!--                    <input type="checkbox" id="actionAdd" name="actionAdd">-->
+                <!--                    <label for="actionAdd">Action</label>-->
+                <!--                    <input type="checkbox" id="dramaAdd" name="dramaAdd">-->
+                <!--                    <label for="dramaAdd">Drama</label>-->
+                <!--                    <input type="checkbox" id="fantasyAdd" name="fantasyAdd">-->
+                <!--                    <label for="fantasyAdd">Fantasy</label>-->
+                <!--                    <input type="checkbox" id="historyAdd" name="historyAdd">-->
+                <!--                    <label for="historyAdd">History</label>-->
+                <!--                </div>-->
+                <!--                <div>-->
+                <!--                    <input type="checkbox" id="horrorAdd" name="horrorAdd">-->
+                <!--                    <label for="horrorAdd">Horror</label>-->
+                <!--                    <input type="checkbox" id="RomanceAdd" name="RomanceAdd">-->
+                <!--                    <label for="RomanceAdd">Romance</label>-->
+                <!--                    <input type="checkbox" id="sci-fiAdd" name="sci-fiAdd">-->
+                <!--                    <label for="sci-fiAdd">Sci-Fi</label>-->
+                <!--                    <input type="checkbox" id="WarAdd" name="WarAdd">-->
+                <!--                    <label for="WarAdd">War</label>-->
+                <!--                </div>-->
+
+
                 <textarea id="plot" placeholder="Plot"></textarea>
                 <input id="rating" placeholder="Rating">
                 <input id="director" placeholder="Director">
@@ -49,16 +107,16 @@
 <div class="loader mx-auto"></div>
 <div id="cards" style="padding-left: 5rem"></div>
 <section id="spotlight-holder">
-<div class="holder fixed-bottom">
-    <div class="light">
-        <div class="black-box"></div>
+    <div class="holder fixed-bottom">
+        <div class="light">
+            <div class="black-box"></div>
+        </div>
     </div>
-</div>
-<div class="holder-2 fixed-bottom">
-    <div class="light">
-        <div class="black-box"></div>
+    <div class="holder-2 fixed-bottom">
+        <div class="light">
+            <div class="black-box"></div>
+        </div>
     </div>
-</div>
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
